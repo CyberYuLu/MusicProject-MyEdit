@@ -40,20 +40,26 @@ _haloRadius = PARTICLE_RADIUS * 3.0;
 	//------------------------
 	this.update = function()
 	{	
-		//---------------------------------------
-		// friction
-		//---------------------------------------
-		this.velocity.scale( ONE - _friction );
-					
-		//---------------------------------------
-		// update position by velocity
-		//---------------------------------------
-		this.position.add( this.velocity );		
+		// 获取当前音量，设置一个影响因子（可以调整）
+    let volumeBoost = 0;
+    if (typeof window.currentVolume === "number") {
+        volumeBoost = window.currentVolume * 10; // 乘以10是为了增强效果
+    }
 
-		//---------------------------------------
-		// wall collisions
-		//---------------------------------------
-		this.updateWallCollisions();
+    // 给速度加点力（你也可以改为乘上某个因子）
+    this.velocity.addXY(
+        (Math.random() - 0.5) * volumeBoost,
+        (Math.random() - 0.5) * volumeBoost
+    );
+
+    // 摩擦
+    this.velocity.scale(ONE - _friction);
+
+    // 更新位置
+    this.position.add(this.velocity);
+
+    // 撞墙反弹
+    this.updateWallCollisions();
 	}
 	
 	//-------------------------------------

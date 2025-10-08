@@ -1464,7 +1464,3 @@ document.ontouchend = function (e) {
     const touch = e.touches[0]; // Get the first touch point
     clusters.mouseMove(touch.pageX - canvasRectangle.left, touch.pageY - canvasID.offsetTop);
 };
-
-
-
-
